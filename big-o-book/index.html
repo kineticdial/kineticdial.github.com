@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-06-08 Fri 14:25 -->
+<!-- 2018-06-08 Fri 14:42 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>A Pragmatist’s Guide to Big O Notation</title>
@@ -257,21 +257,21 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge35729e">1. Introduction</a>
+<li><a href="#orgff51c34">1. Introduction</a>
 <ul>
-<li><a href="#org46d05e6">1.1. Prerequisite skills</a></li>
-<li><a href="#org8877e98">1.2. Tools used in this book</a></li>
-<li><a href="#org889818f">1.3. Chapter format</a></li>
+<li><a href="#orgbfcdb6b">1.1. Prerequisite skills</a></li>
+<li><a href="#orge8ece15">1.2. Tools used in this book</a></li>
+<li><a href="#orgafefdf7">1.3. Chapter format</a></li>
 </ul>
 </li>
-<li><a href="#org3a0b7b3">2. Big O in a nutshell</a>
+<li><a href="#orgb04e8fd">2. Big O in a nutshell</a>
 <ul>
-<li><a href="#org498965c">2.1. Key takeaways</a></li>
-<li><a href="#org8e2138b">2.2. Exercises</a>
+<li><a href="#org68d6bfe">2.1. Key takeaways</a></li>
+<li><a href="#orgf26a99a">2.2. Exercises</a>
 <ul>
-<li><a href="#org687bef3">2.2.1. Problem 1</a></li>
-<li><a href="#org64ed3d1">2.2.2. Problem 2</a></li>
-<li><a href="#org5ef31c1">2.2.3. Problem 3</a></li>
+<li><a href="#orgea5f623">2.2.1. Problem 1</a></li>
+<li><a href="#org494d586">2.2.2. Problem 2</a></li>
+<li><a href="#org4671ef3">2.2.3. Problem 3</a></li>
 </ul>
 </li>
 </ul>
@@ -280,8 +280,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orge35729e" class="outline-2">
-<h2 id="orge35729e"><span class="section-number-2">1</span> Introduction</h2>
+<div id="outline-container-orgff51c34" class="outline-2">
+<h2 id="orgff51c34"><span class="section-number-2">1</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <b>Your co-workers:</b> A bunch of Computer Science grads who graduated
@@ -321,8 +321,8 @@ job.</li>
 </ul>
 </div>
 
-<div id="outline-container-org46d05e6" class="outline-3">
-<h3 id="org46d05e6"><span class="section-number-3">1.1</span> Prerequisite skills</h3>
+<div id="outline-container-orgbfcdb6b" class="outline-3">
+<h3 id="orgbfcdb6b"><span class="section-number-3">1.1</span> Prerequisite skills</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 The target audience for this book is for programmers already in the
@@ -338,8 +338,8 @@ you'll get the most out of this book if you can code.
 </div>
 </div>
 
-<div id="outline-container-org8877e98" class="outline-3">
-<h3 id="org8877e98"><span class="section-number-3">1.2</span> Tools used in this book</h3>
+<div id="outline-container-orge8ece15" class="outline-3">
+<h3 id="orge8ece15"><span class="section-number-3">1.2</span> Tools used in this book</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 For all examples I'll using version 2.5.1 of the <a href="https://www.ruby-lang.org/en/">Ruby programming
@@ -369,8 +369,8 @@ The only library I'll be using with Ruby is it's wonderful built-in
 </div>
 </div>
 
-<div id="outline-container-org889818f" class="outline-3">
-<h3 id="org889818f"><span class="section-number-3">1.3</span> Chapter format</h3>
+<div id="outline-container-orgafefdf7" class="outline-3">
+<h3 id="orgafefdf7"><span class="section-number-3">1.3</span> Chapter format</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 To make it a little easier to understand, I'll be using a consistent
@@ -392,8 +392,8 @@ chapter's contents.</dd>
 </div>
 </div>
 </div>
-<div id="outline-container-org3a0b7b3" class="outline-2">
-<h2 id="org3a0b7b3"><span class="section-number-2">2</span> Big O in a nutshell</h2>
+<div id="outline-container-orgb04e8fd" class="outline-2">
+<h2 id="orgb04e8fd"><span class="section-number-2">2</span> Big O in a nutshell</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 In this chapter:
@@ -432,11 +432,7 @@ heavily dependant on its input.
 
 empty_list = []
 small_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-large_list =  []
-
-(0..1_000_000).each <span style="color: #a020f0;">do</span> |n|
-  large_list &lt;&lt; n
-<span style="color: #a020f0;">end</span>
+large_list = (0..10_000).to_a
 
 <span style="color: #228b22;">Benchmark</span>.bm <span style="color: #a020f0;">do</span> |x|
   x.report(<span style="color: #8b2252;">'empty'</span>) { first_or_nil(empty_list) }
@@ -486,11 +482,7 @@ you're pretty sure its alright because there's no nested loops.
 
 empty_list = []
 small_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-large_list =  []
-
-(0..1_000_000).each <span style="color: #a020f0;">do</span> |n|
-  large_list &lt;&lt; n
-<span style="color: #a020f0;">end</span>
+large_list = (0..10_000).to_a
 
 <span style="color: #228b22;">Benchmark</span>.bm <span style="color: #a020f0;">do</span> |x|
   x.report(<span style="color: #8b2252;">'empty'</span>) { sum(empty_list) }
@@ -546,11 +538,7 @@ the nested for-loops in the body of the function.
 
 empty_list = []
 small_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-large_list =  []
-
-(0..10_000).each <span style="color: #a020f0;">do</span> |n|
-  large_list &lt;&lt; n
-<span style="color: #a020f0;">end</span>
+large_list = (0..10_000).to_a
 
 <span style="color: #228b22;">Benchmark</span>.bm <span style="color: #a020f0;">do</span> |x|
   x.report(<span style="color: #8b2252;">'empty'</span>) { contains_duplicates(empty_list) }
@@ -613,7 +601,7 @@ because it will not scale well.
 <p>
 As you leave the office for the day you're still thinking about the
 <code>contains_duplicates</code> function and how badly it performs based on the
-length of its input. You tell them how you wish there was a way to
+length of its input. You muse about how you wish there was a way to
 classify functions that might behave this badly.
 </p>
 
@@ -679,8 +667,8 @@ worst-case scenario.
 </p>
 </div>
 
-<div id="outline-container-org498965c" class="outline-3">
-<h3 id="org498965c"><span class="section-number-3">2.1</span> Key takeaways</h3>
+<div id="outline-container-org68d6bfe" class="outline-3">
+<h3 id="org68d6bfe"><span class="section-number-3">2.1</span> Key takeaways</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Big O notation represents how much time a function will take to
@@ -690,12 +678,12 @@ execute <i>relative</i> to its input size.</li>
 </div>
 </div>
 
-<div id="outline-container-org8e2138b" class="outline-3">
-<h3 id="org8e2138b"><span class="section-number-3">2.2</span> Exercises</h3>
+<div id="outline-container-orgf26a99a" class="outline-3">
+<h3 id="orgf26a99a"><span class="section-number-3">2.2</span> Exercises</h3>
 <div class="outline-text-3" id="text-2-2">
 </div>
-<div id="outline-container-org687bef3" class="outline-4">
-<h4 id="org687bef3"><span class="section-number-4">2.2.1</span> Problem 1</h4>
+<div id="outline-container-orgea5f623" class="outline-4">
+<h4 id="orgea5f623"><span class="section-number-4">2.2.1</span> Problem 1</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
 <b>Q:</b> In the above <code>has_number?</code> function, what inputs would be the
@@ -709,8 +697,8 @@ search through the <i>entire</i> list before exiting.
 </div>
 </div>
 
-<div id="outline-container-org64ed3d1" class="outline-4">
-<h4 id="org64ed3d1"><span class="section-number-4">2.2.2</span> Problem 2</h4>
+<div id="outline-container-org494d586" class="outline-4">
+<h4 id="org494d586"><span class="section-number-4">2.2.2</span> Problem 2</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <p>
 <b>Q:</b> The programmer in the story seemed to be clued-in to when a
@@ -723,8 +711,8 @@ function might perform badly. What was that clue?
 </div>
 </div>
 
-<div id="outline-container-org5ef31c1" class="outline-4">
-<h4 id="org5ef31c1"><span class="section-number-4">2.2.3</span> Problem 3</h4>
+<div id="outline-container-org4671ef3" class="outline-4">
+<h4 id="org4671ef3"><span class="section-number-4">2.2.3</span> Problem 3</h4>
 <div class="outline-text-4" id="text-2-2-3">
 <p>
 <b>Q:</b> True/False: A function can have different Big O representations
@@ -756,7 +744,7 @@ contain different powers of the same variable(s)."
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Patrick Brown</p>
-<p class="date">Created: 2018-06-08 Fri 14:25</p>
+<p class="date">Created: 2018-06-08 Fri 14:42</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
