@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-06-07 Thu 22:45 -->
+<!-- 2018-06-08 Fri 14:20 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>A Pragmatist’s Guide to Big O Notation</title>
@@ -180,7 +180,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<style>body{max-width: 666px;}</style>
+<style>body{max-width: 600px;margin: 0 auto;}</style>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -257,15 +257,21 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orga2dd8bb">1. Introduction</a></li>
-<li><a href="#org851e86f">2. Constant and Linear Time</a>
+<li><a href="#orgaba7f83">1. Introduction</a>
 <ul>
-<li><a href="#orge620df5">2.1. Key takeaways</a></li>
-<li><a href="#org47368f7">2.2. Exercises</a>
+<li><a href="#org2b82856">1.1. Prerequisite skills</a></li>
+<li><a href="#orga684747">1.2. Tools used in this book</a></li>
+<li><a href="#org95e5b63">1.3. Chapter format</a></li>
+</ul>
+</li>
+<li><a href="#org5535eb5">2. Big O in a nutshell</a>
 <ul>
-<li><a href="#orga6c7c1c">2.2.1. Problem 1</a></li>
-<li><a href="#orgaf707a2">2.2.2. Problem 2</a></li>
-<li><a href="#org63b64b3">2.2.3. Problem 3</a></li>
+<li><a href="#orgf3a343f">2.1. Key takeaways</a></li>
+<li><a href="#org5ef04ca">2.2. Exercises</a>
+<ul>
+<li><a href="#org1b34316">2.2.1. Problem 1</a></li>
+<li><a href="#orgf29dbc6">2.2.2. Problem 2</a></li>
+<li><a href="#orgc8244d6">2.2.3. Problem 3</a></li>
 </ul>
 </li>
 </ul>
@@ -274,8 +280,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orga2dd8bb" class="outline-2">
-<h2 id="orga2dd8bb"><span class="section-number-2">1</span> Introduction</h2>
+<div id="outline-container-orgaba7f83" class="outline-2">
+<h2 id="orgaba7f83"><span class="section-number-2">1</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <b>Your co-workers:</b> A bunch of Computer Science grads who graduated
@@ -313,289 +319,444 @@ runnable code. Sometimes its easier to learn by doing.</li>
 <li>Give examples of how certain concepts are useful in your day-to-day
 job.</li>
 </ul>
+</div>
+
+<div id="outline-container-org2b82856" class="outline-3">
+<h3 id="org2b82856"><span class="section-number-3">1.1</span> Prerequisite skills</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+The target audience for this book is for programmers already in the
+industry who do not have Computer Science backgrounds. Therefore, I'm
+expecting most people will know how to code, and can code very well.
+</p>
 
 <p>
-Now, let’s learn about Big O Notation.
+While it is possible that someone just learning to code could get a
+lot out of this book (all the code samples will be very simple),
+you'll get the most out of this book if you can code.
 </p>
 </div>
 </div>
-<div id="outline-container-org851e86f" class="outline-2">
-<h2 id="org851e86f"><span class="section-number-2">2</span> Constant and Linear Time</h2>
+
+<div id="outline-container-orga684747" class="outline-3">
+<h3 id="orga684747"><span class="section-number-3">1.2</span> Tools used in this book</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+For all examples I'll using version 2.5.1 of the <a href="https://www.ruby-lang.org/en/">Ruby programming
+language</a>. Other versions of Ruby 2.X.X should be fine, but these
+examples are only guaranteed to run on 2.5.1.
+</p>
+
+<p>
+I'm using Ruby for a couple of reasons.
+</p>
+
+<ul class="org-ul">
+<li>It is the language I am the most familiar with and have been using
+professionally for over 5 years.</li>
+<li>It is pretty easy to read for people who aren't familiar with it.</li>
+<li>It is superficially similar to Python and PHP, languages I
+anticipate other pragmatists being familiar with.</li>
+<li>Lastly, the code I'll be writing should be generic enough to easily
+transliterate to any another language.</li>
+</ul>
+
+<p>
+The only library I'll be using with Ruby is it's wonderful built-in
+<code>benchmark</code>. You can read more about the <code>benchmark</code> library in its
+<a href="https://ruby-doc.org/stdlib-2.5.1/libdoc/benchmark/rdoc/Benchmark.html">official documentation page</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org95e5b63" class="outline-3">
+<h3 id="org95e5b63"><span class="section-number-3">1.3</span> Chapter format</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+To make it a little easier to understand, I'll be using a consistent
+format for each chapter. It'll look something like this:
+</p>
+
+<dl class="org-dl">
+<dt>Chapter title</dt><dd>Self explanatory.</dd>
+<dt>"In this chapter"</dt><dd>A summary of what the reader can expect to
+learn.</dd>
+<dt>Chapter body</dt><dd>The actual explanation of the concepts listed above,
+using code examples. Sometimes this will have
+subsections, but most times it will not.</dd>
+<dt>"Key takeaways"</dt><dd>Reiterate what the reader learned with concise
+definitions for those concepts.</dd>
+<dt>"Exercises"</dt><dd>Problems to test the reader's knowledge of the
+chapter's contents.</dd>
+</dl>
+</div>
+</div>
+</div>
+<div id="outline-container-org5535eb5" class="outline-2">
+<h2 id="org5535eb5"><span class="section-number-2">2</span> Big O in a nutshell</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 In this chapter:
 </p>
 <ul class="org-ul">
-<li>You'll understand why Big O is useful to programmers</li>
-<li>Get some basic understanding of <b>constant time</b> versus <b>linear time</b></li>
+<li>You'll have a working definition of what Big O is.</li>
+<li>You'll understand why Big O is useful to programmers.</li>
 </ul>
 
 <p>
-Let me propose a problem to you: Let's say you had the following piece
-of code and your boss wanted to know how fast it was.
+Let me propose a problem to you: Let's say you had the following
+helper function and your boss wanted to know how fast it was.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ruby"><span style="color: #b22222;"># </span><span style="color: #b22222;">is_even.rb</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">is_even?</span>(number)
-  number % 2 == 0
-<span style="color: #a020f0;">end</span>
-
-<span style="color: #483d8b;">puts</span> is_even?(<span style="color: #228b22;">ARGV</span>[0].to_i)
-</pre>
-</div>
-
-<p>
-Easy! So you fire up your terminal and run the following.
-</p>
-
-<pre class="example">
-$ time ruby is_even.rb 2
-true
-ruby is_even.rb 2 0.06s user 0.01s system 84% cpu 0.084 total
-</pre>
-
-<p>
-Great! You send your findings to your boss and call it a
-day. Unfortunately, next morning you come into the office to an email.
-</p>
-
-<pre class="example">
-to: The Reader &lt;the.reader@megacorp.co&gt;
-from: Big Boss &lt;big.boss@megacorp.co&gt;
-subject: is_even.rb performance
-
-Reader,
-
-You said that is_even.rb takes only 0.084 seconds to run, but I've got
-DevOps telling me we're getting drastically different numbers from our
-live servers. Do you mind telling me what could've gone wrong?
-
-- Big Boss
-</pre>
-
-<p>
-Damn, Big Boss is right. As a self-taught developer you know
-intuitively that this code will never be extremely slow (it only does
-one thing!), but it's hard to describe exactly what your boss can
-expect without factoring the discrepancy of performance between
-computers.
-</p>
-
-<p>
-This is where Big O comes in. <b>Big O generically describes the time</b>
-<b>it takes an algorithm to run, without factoring in individual CPU</b>
-<b>speed.</b> It can also measure space, but we'll get into that later.
-</p>
-
-<p>
-The code above is \(O(1)\) in Big O notation, which is often referred to
-as <b>constant time</b>. This is because the code only does one thing.
-Specifically, it does <i>the same amount of things no matter the input</i>.
-In other words, you could say that the number of things it does is
-<b>constant</b>.
-</p>
-
-<p>
-A mental shortcut for recognizing constant time functions would be the
-absence of any loops or recursion. Even if a function does a couple
-"things," it is still constant time as long as the "couple" doesn't
-grow depending on the input. For example:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-ruby"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">foo</span>(n)
-  n += 2
-  n / 2
-<span style="color: #a020f0;">end</span>
-</pre>
-</div>
-
-<p>
-This would still be a constant time function because, no matter the
-input, it will always only do 2 operations.
-</p>
-
-<p>
-Alternatively, if your boss had given you this code instead:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-ruby"><span style="color: #b22222;"># </span><span style="color: #b22222;">sum_of_evens.rb</span>
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">sum_of_evens</span>(number)
-  result = 0
-  (0..number).each <span style="color: #a020f0;">do</span> |n|
-    <span style="color: #a020f0;">if</span> n % 2 == 0
-      result += n
-    <span style="color: #a020f0;">end</span>
-  <span style="color: #a020f0;">end</span>
-  result
-<span style="color: #a020f0;">end</span>
-
-<span style="color: #483d8b;">puts</span> sum_of_evens(<span style="color: #228b22;">ARGV</span>[0].to_i)
-</pre>
-</div>
-
-<p>
-You can immediately see that it does more than one thing (it iterates
-between 0 and the number passed into <code>ARGV</code>). In this case, the Big O
-notation would be \(O(n)\), because it does \(n\) things. O(n) is also
-called <b>linear time</b>.
-</p>
-
-<p>
-Let's run a few comparative tests between <code>is_even?</code> and
-<code>sum_of_evens</code>.
-</p>
-
-<pre class="example">
-$ time ruby is_even.rb 1
-false
-ruby is_even.rb 1 0.06s user 0.01s system 92% cpu 0.075 total
-
-$ time ruby is_even.rb 100
-true
-ruby is_even.rb 100 0.06s user 0.01s system 96% cpu 0.077 total
-
-$ time ruby is_even.rb 1000000
-true
-ruby is_even.rb 1000000 0.06s user 0.01s system 96% cpu 0.081 total
-
-$ time ruby sum_of_evens.rb 1
-0
-ruby sum_of_evens.rb 1 0.06s user 0.01s system 88% cpu 0.076 total
-
-$ time ruby sum_of_evens.rb 100
-2550
-ruby sum_of_evens.rb 100 0.06s user 0.01s system 97% cpu 0.084 total
-
-$ time ruby sum_of_evens.rb 1000000
-250000500000
-ruby sum_of_evens.rb 1000000 0.13s user 0.01s system 92% cpu 0.153 total
-</pre>
-
-<p>
-Whoa, what the heck happened? When we passed 1,000,000 to
-<code>sum_of_evens</code> it almost doubled in runtime, whereas it remained
-relatively <b>constant</b> with <code>is_even?</code>. This underscores the most
-important and useful feature of Big O; <b>Big O describes how the
-runtime of an algorithm grows as its input gets bigger.</b> (Again, it
-can also describe how space grows, but don't worry about this now.)
-</p>
-
-<p>
-Have you ever written a feature that totally busted once your website
-had 100,000 users versus 100? You probably didn't take into
-consideration how a particular piece of code (most likely a database
-query) would grow as you got more users.
-</p>
-
-
-<p>
-In Chapter 2 we'll be diving into all the different categories of
-runtimes for Big O, from \(O(1)\) to \(O(n!)\).
-</p>
-</div>
-
-<div id="outline-container-orge620df5" class="outline-3">
-<h3 id="orge620df5"><span class="section-number-3">2.1</span> Key takeaways</h3>
-<div class="outline-text-3" id="text-2-1">
-<ul class="org-ul">
-<li>Big O generically describes the time it takes an algorithm to run,
-without factoring in individual CPU speed</li>
-<li>Big O describes how the runtime of an algorithm grows as its input
-gets bigger</li>
-<li>\(O(1)\), or constant time, is code that doesn't take longer to run on
-larger inputs</li>
-<li>\(O(n)\), or linear time, is code in which runtime grows linearly with
-larger inputs</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-org47368f7" class="outline-3">
-<h3 id="org47368f7"><span class="section-number-3">2.2</span> Exercises</h3>
-<div class="outline-text-3" id="text-2-2">
-</div>
-<div id="outline-container-orga6c7c1c" class="outline-4">
-<h4 id="orga6c7c1c"><span class="section-number-4">2.2.1</span> Problem 1</h4>
-<div class="outline-text-4" id="text-2-2-1">
-<p>
-<b>Q:</b> Is the following code \(O(1)\) or \(O(n)\)?
-</p>
-
-<div class="org-src-container">
-<pre class="src src-ruby"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">subtract</span>(a, b)
-  a - b
-<span style="color: #a020f0;">end</span>
-</pre>
-</div>
-
-<p>
-<b>A:</b> \(O(1)\), or constant time
-</p>
-</div>
-</div>
-
-<div id="outline-container-orgaf707a2" class="outline-4">
-<h4 id="orgaf707a2"><span class="section-number-4">2.2.2</span> Problem 2</h4>
-<div class="outline-text-4" id="text-2-2-2">
-<p>
-<b>Q:</b> Is the following code \(O(1)\) or \(O(n)\)?
-</p>
-
-<div class="org-src-container">
-<pre class="src src-ruby"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">compare</span>(a, b)
-  diff = a - b
-
-  <span style="color: #a020f0;">if</span> diff &lt; 0
-    <span style="color: #008b8b;">:lt</span>
-  <span style="color: #a020f0;">elsif</span> diff == 0
-    <span style="color: #008b8b;">:eq</span>
+<pre class="src src-ruby"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">first_or_nil</span>(list)
+  <span style="color: #a020f0;">if</span> list.empty?
+    <span style="color: #008b8b;">nil</span>
   <span style="color: #a020f0;">else</span>
-    <span style="color: #008b8b;">:gt</span>
+    list[0]
   <span style="color: #a020f0;">end</span>
 <span style="color: #a020f0;">end</span>
 </pre>
 </div>
 
 <p>
-<b>A:</b> \(O(1)\), or constant time
-</p>
-</div>
-</div>
-
-<div id="outline-container-org63b64b3" class="outline-4">
-<h4 id="org63b64b3"><span class="section-number-4">2.2.3</span> Problem 3</h4>
-<div class="outline-text-4" id="text-2-2-3">
-<p>
-<b>Q:</b> Is the following code \(O(1)\) or \(O(n)\)?
+Easy! You write up a few benchmarks to demonstrate that this
+function, in fact, is quite fast. In your benchmarks you include
+several different list sizes because you know that performance can be
+heavily dependant on its input.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ruby"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">average</span>(list)
+<pre class="src src-ruby"><span style="color: #483d8b;">require</span> <span style="color: #8b2252;">'benchmark'</span>
+<span style="color: #483d8b;">require_relative</span> <span style="color: #8b2252;">'./first_or_nil.rb'</span>
+
+empty_list = []
+small_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+large_list =  []
+
+(0..1_000_000).each <span style="color: #a020f0;">do</span> |n|
+  large_list &lt;&lt; n
+<span style="color: #a020f0;">end</span>
+
+<span style="color: #228b22;">Benchmark</span>.bm <span style="color: #a020f0;">do</span> |x|
+  x.report(<span style="color: #8b2252;">'empty'</span>) { first_or_nil(empty_list) }
+  x.report(<span style="color: #8b2252;">'small'</span>) { first_or_nil(small_list) }
+  x.report(<span style="color: #8b2252;">'large'</span>) { first_or_nil(large_list) }
+<span style="color: #a020f0;">end</span>
+</pre>
+</div>
+
+<pre class="example">
+       user     system      total        real
+empty  0.000000   0.000000   0.000000 (  0.000005)
+small  0.000000   0.000000   0.000000 (  0.000003)
+large  0.000000   0.000000   0.000000 (  0.000003)
+</pre>
+
+<p>
+You send in your findings to your boss, proving that <code>fist_or_nil</code> is
+super performant no matter how big <code>list</code> is. Your boss is very
+impressed, but has more work for you. They send you this next function
+to benchmark.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ruby"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">sum</span>(list)
   total = 0
 
   list.each <span style="color: #a020f0;">do</span> |n|
     total += n
   <span style="color: #a020f0;">end</span>
 
-  total / list.length
+  total
 <span style="color: #a020f0;">end</span>
 </pre>
 </div>
 
 <p>
-<b>A:</b> \(O(n)\), or linear time
+Again, you write up a benchmark using several list sizes as sample
+input. Because of your past experience you can intuit that this
+function may be a little less performant because it has a loop, but
+you're pretty sure its arlight because there's no nested loops.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ruby"><span style="color: #483d8b;">require</span> <span style="color: #8b2252;">'benchmark'</span>
+<span style="color: #483d8b;">require_relative</span> <span style="color: #8b2252;">'./sum.rb'</span>
+
+empty_list = []
+small_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+large_list =  []
+
+(0..1_000_000).each <span style="color: #a020f0;">do</span> |n|
+  large_list &lt;&lt; n
+<span style="color: #a020f0;">end</span>
+
+<span style="color: #228b22;">Benchmark</span>.bm <span style="color: #a020f0;">do</span> |x|
+  x.report(<span style="color: #8b2252;">'empty'</span>) { sum(empty_list) }
+  x.report(<span style="color: #8b2252;">'small'</span>) { sum(small_list) }
+  x.report(<span style="color: #8b2252;">'large'</span>) { sum(large_list) }
+<span style="color: #a020f0;">end</span>
+</pre>
+</div>
+
+<pre class="example">
+       user     system      total        real
+empty  0.000000   0.000000   0.000000 (  0.000005)
+small  0.000000   0.000000   0.000000 (  0.000004)
+large  0.040000   0.000000   0.040000 (  0.040358)
+</pre>
+
+<p>
+You write up your findings for your boss. "While there's a noticeable
+increase in time on the benchmarks for when <code>list</code> is extremely large,
+this function is still very performant," you conclude.
+</p>
+
+<p>
+It's now 4 o'clock in the afternoon, but your boss has one more
+function for you to test before you leave for the day. It's a function
+that finds duplicate user IDs in a list.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ruby"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">contains_duplicates</span>(list)
+  list.each_with_index <span style="color: #a020f0;">do</span> |x_index, x|
+    list.each_with_index <span style="color: #a020f0;">do</span> |y_index, y|
+      <span style="color: #a020f0;">if</span> x_index != y_index &amp;&amp; x == y
+        <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">true</span>
+      <span style="color: #a020f0;">end</span>
+    <span style="color: #a020f0;">end</span>
+  <span style="color: #a020f0;">end</span>
+
+  <span style="color: #008b8b;">false</span>
+<span style="color: #a020f0;">end</span>
+</pre>
+</div>
+
+<p>
+Again, you write a suite of benchmarks. This time you have a
+strange suspicion that this might not perform well because you noticed
+the nested for-loops in the body of the function.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ruby"><span style="color: #483d8b;">require</span> <span style="color: #8b2252;">'benchmark'</span>
+<span style="color: #483d8b;">require_relative</span> <span style="color: #8b2252;">'./contains_duplicates.rb'</span>
+
+empty_list = []
+small_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+large_list =  []
+
+(0..10_000).each <span style="color: #a020f0;">do</span> |n|
+  large_list &lt;&lt; n
+<span style="color: #a020f0;">end</span>
+
+<span style="color: #228b22;">Benchmark</span>.bm <span style="color: #a020f0;">do</span> |x|
+  x.report(<span style="color: #8b2252;">'empty'</span>) { contains_duplicates(empty_list) }
+  x.report(<span style="color: #8b2252;">'small'</span>) { contains_duplicates(small_list) }
+  x.report(<span style="color: #8b2252;">'large'</span>) { contains_duplicates(large_list) }
+<span style="color: #a020f0;">end</span>
+</pre>
+</div>
+
+<pre class="example">
+       user     system      total        real
+empty  0.000000   0.000000   0.000000 (  0.000008)
+small  0.000000   0.000000   0.000000 (  0.000015)
+large
+</pre>
+
+<p>
+Huh, is it frozen? You press <code>Ctrl-C</code> to end the process and then
+lower <code>large_list</code> from <code>1_000_000</code> to <code>100_000</code>.
+</p>
+
+<pre class="example">
+       user     system      total        real
+empty  0.000000   0.000000   0.000000 (  0.000005)
+small  0.000000   0.000000   0.000000 (  0.000014)
+large
+</pre>
+
+<p>
+Same thing. Also the fans on your computer have started to spin
+up. You try lowering <code>large_list</code> again, this time to <code>10_000</code>.
+</p>
+
+<pre class="example">
+       user     system      total        real
+empty  0.000000   0.000000   0.000000 (  0.000005)
+small  0.000000   0.000000   0.000000 (  0.000013)
+large  6.620000   0.000000   6.620000 (  6.623028)
+</pre>
+
+<p>
+Finally! A result! You notice a few things right away:
+</p>
+
+<ul class="org-ul">
+<li>It took about twice as long to compute 10 elements compared to 0.</li>
+<li>It took about <i>500,000 times longer</i> to compute 10,000 elements
+compared to 10.</li>
+<li>When <code>list</code> was 100,000 elements or larger the process effectively
+froze.</li>
+</ul>
+
+<p>
+You send in your findings to your boss, saying that
+<code>contains_duplicates</code> is fine for the time being, as your system only
+has about 200 users, but advise optimizing the algorithm immediately
+because it will not scale well.
+</p>
+
+<p>
+As you leave the office for the day you're still thinking about the
+<code>contains_duplicates</code> function and how badly it performs based on the
+length of its input. You tell them how you wish there was a way to
+classify functions that might behave this badly.
+</p>
+
+<p>
+Turns out there is! It's called Big O Notation. <b>Big O notation</b>
+<b>represents how much time a function will take to execute <i>relative</i></b>
+<b>to its input size.</b>
+</p>
+
+<p>
+We've already looked at three different categories of Big O
+classifications in this chapter:
+</p>
+
+<ul class="org-ul">
+<li><code>first_or_nil</code> was \(O(1)\), or <b>constant time</b>. As its inputs grew
+time remained <i>constant</i>.</li>
+<li><code>sum</code> was \(O(n)\), or <b>linear time</b>. As its inputs grew time
+increased <i>linearly</i>.</li>
+<li><code>contains_duplicates</code> was \(O(n^2)\), or <b>polynomial time</b><sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>. As
+its inputs grew time increased <i>polynomially</i>.</li>
+</ul>
+
+<p>
+If you were to graph these functions it would look something like
+this:
+</p>
+
+
+<div class="figure">
+<p><img src="https://justin.abrah.ms/static/images/runtime_comparison.png" alt="runtime_comparison.png" width="500px" />
+</p>
+</div>
+
+<p>
+Don't worry about committing all of this to memory yet, I'm just
+trying to get you thinking about how inputs might effect the
+performance of a function for right now. We'll dive into each category
+of Big O performance later.
+</p>
+
+<p>
+An important thing to keep in mind is that the <b>Big O always represents</b>
+<b>the "worst-case scenario."</b> For example:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ruby"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">has_number?</span>(list, number)
+  list.each <span style="color: #a020f0;">do</span> |n|
+    <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">true</span> <span style="color: #a020f0;">if</span> n == number
+  <span style="color: #a020f0;">end</span>
+
+  <span style="color: #008b8b;">false</span>
+<span style="color: #a020f0;">end</span>
+</pre>
+</div>
+
+<p>
+This function could exit in only one computation if the inputs were
+<code>list: [1, 2, 3, ..., 1_000_000], number: 1</code>, however we'd still
+consider this \(O(n)\), or linear time, because that's not the
+worst-case scenario.
+</p>
+</div>
+
+<div id="outline-container-orgf3a343f" class="outline-3">
+<h3 id="orgf3a343f"><span class="section-number-3">2.1</span> Key takeaways</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>Big O notation represents how much time a function will take to
+execute <i>relative</i> to its input size.</li>
+<li>Big O always represents the "worst-case scenario."</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org5ef04ca" class="outline-3">
+<h3 id="org5ef04ca"><span class="section-number-3">2.2</span> Exercises</h3>
+<div class="outline-text-3" id="text-2-2">
+</div>
+<div id="outline-container-org1b34316" class="outline-4">
+<h4 id="org1b34316"><span class="section-number-4">2.2.1</span> Problem 1</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+<b>Q:</b> In the above <code>has_number?</code> function, what inputs would be the
+worst-case scenario?
+</p>
+
+<p>
+<b>A:</b> If <code>number</code> does not appear in <code>list</code>, the function will have to
+search through the <i>entire</i> list before exiting.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf29dbc6" class="outline-4">
+<h4 id="orgf29dbc6"><span class="section-number-4">2.2.2</span> Problem 2</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+<b>Q:</b> The programmer in the story seemed to be clued-in to when a
+function might perform badly. What was that clue?
+</p>
+
+<p>
+<b>A:</b> Nested for-loops.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc8244d6" class="outline-4">
+<h4 id="orgc8244d6"><span class="section-number-4">2.2.3</span> Problem 3</h4>
+<div class="outline-text-4" id="text-2-2-3">
+<p>
+<b>Q:</b> True/False: A function can have different Big O representations
+depending on its input.
+</p>
+
+<p>
+<b>A:</b> False. Big O always represents the worst-case scenario.
 </p>
 </div>
 </div>
 </div>
 </div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+Unfortunately, "polynomial" is one of those ugly math terms
+we're going to have to get used to using. An easy way to think about
+it would be "a function with \(n\) raised to the power of some number."
+However, a more complete definition would be "an expression of more
+than two algebraic terms, especially the sum of several terms that
+contain different powers of the same variable(s)."
+</p></div></div>
+
+
 </div>
+</div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Patrick Brown</p>
-<p class="date">Created: 2018-06-07 Thu 22:45</p>
+<p class="date">Created: 2018-06-08 Fri 14:20</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
