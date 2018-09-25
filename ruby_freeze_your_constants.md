@@ -34,7 +34,7 @@ If you're already knowledgeable of the Ruby `Array` class, you've probably spott
 In other words, after `example 2` gets executed, `ACTIONABLE_STATES` becomes
 `[:authenticated, :to_settle, :settled, :declined]` until you reboot the server.
 
-If you have multiple Ruby boxes running behind an Load Balancer (as we did), this can further obfuscate
+If you have multiple Ruby boxes running behind a Load Balancer (as we did), this can further obfuscate
 the problem. Because `example 2` might only have been run on certain boxes, you might get cases where one
 request will not exhibit the bug while another identical one will.
 
