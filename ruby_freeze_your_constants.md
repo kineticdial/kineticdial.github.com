@@ -20,15 +20,15 @@ codebase.
 
 ```ruby
 # example 2
-all_states = ACTIONABLE_STATES.append(DONE_STATES)
+all_states = ACTIONABLE_STATES.concat(DONE_STATES)
 
 all_states.each do |state|
   # ...
 end
 ```
 
-If you're already knowledgeable of the Ruby `Enumerable` module, you've probably spotted the offending line already.
-`#append` mutates the original list, even though it doesn't end with the idiomatic `!`, and because
+If you're already knowledgeable of the Ruby `Array` class, you've probably spotted the offending line already.
+`#concat` mutates the original list, even though it doesn't end with the idiomatic `!`, and because
 `ACTIONABLE_STATES` is held statically in memory, when this code gets executed it changes
 `ACTIONABLE_STATES` state for the rest of that Ruby virtual machine's life.
 
