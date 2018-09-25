@@ -1,5 +1,4 @@
-Freeze Your Constants in Ruby
-=============================
+## Freeze Your Constants in Ruby
 
 Years ago I was working on a very large Ruby on Rails codebase that used
 constants to hold lists of credit card transaction states. For example:
