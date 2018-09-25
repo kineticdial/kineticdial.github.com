@@ -5,7 +5,7 @@ entertains himself by playing beer-league hockey, studying Environmental Science
 at Oregon State University, and running [Quasars][1], a link-aggregator for
 Astrophysics.
 
-## Writing
+## Field Notes
 
 - [Freeze Your Constants in Ruby](/ruby_freeze_your_constants.html)
 
