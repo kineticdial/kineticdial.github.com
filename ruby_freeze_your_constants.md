@@ -49,3 +49,5 @@ DONE_STATES = [:settled, :declined].freeze
 
 This would cause `example 2` to produce a `can't modify frozen array (RuntimeError)`, and if you've unit tested
 `example 2`, you would've hopefully caught this before it was ever even deployed.
+
+_[Discuss on Lobste.rs](https://lobste.rs/s/9bxh5m/freeze_your_constants_ruby)_
