@@ -32,7 +32,7 @@ If you're already knowledgeable of the Ruby `Enumerable` module, you've probably
 `ACTIONABLE_STATES` is held statically in memory, when this code gets executed it changes
 `ACTIONABLE_STATES` state for the rest of that Ruby virtual machine's life.
 
-In other words after `example 2` gets executed, `ACTIONABLE_STATES` becomes
+In other words, after `example 2` gets executed, `ACTIONABLE_STATES` becomes
 `[:authenticated, :to_settle, :settled, :declined]` until you reboot the server.
 
 If you have multiple Ruby boxes running behind an Load Balancer (as we did), this can further obfuscate
