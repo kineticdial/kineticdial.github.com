@@ -1,0 +1,51 @@
+Freeze Your Constants in Ruby
+=============================
+
+Years ago I was working on a very large Ruby on Rails codebase that used SCREAMING_SNAKE_CASE
+constants to hold lists of credit card transaction states. For example:
+
+```ruby
+# example 1
+class Txn
+  ACTIONABLE_STATES = [:authenticated, :to_settle]
+  DONE_STATES = [:settled, :declined]
+  
+  # ...
+end
+```
+
+However, we had a bug in which a settled transaction could pass a `txn.state.in? ACTIONABLE_STATES`
+check. After hours of searching, we found the offending code in a completely different part of the
+codebase.
+
+```ruby
+# example 2
+all_states = ACTIONABLE_STATES.append(DONE_STATES)
+
+all_states.each do |state|
+  # ...
+end
+```
+
+If you're already knowledgeable of the Ruby `Enumerable` module, you've probably spotted the offending line already.
+`#append` mutates the original list, even though it doesn't end with the idiomatic `!`, and because
+`ACTIONABLE_STATES` is held statically in memory, when this code gets executed it changes
+`ACTIONABLE_STATES` state for the rest of that Ruby virtual machine's life.
+
+In other words after `example 2` gets executed, `ACTIONABLE_STATES` becomes
+`[:authenticated, :to_settle, :settled, :declined]` until you reboot the server.
+
+If you have multiple Ruby boxes running behind an Load Balancer (as we did), this can further obfuscate
+the problem. Because `example 2` might only have been run on certain boxes, you might get cases where one
+request will not exhibit the bug while another identical one will.
+
+The solution? **Freeze your constants.**
+
+```ruby
+# example 3
+ACTIONABLE_STATES = [:authenticated, :to_settle].freeze
+DONE_STATES = [:settled, :declined].freeze
+```
+
+This would cause `example 2` to produce a `can't modify frozen array (RuntimeError)`, and if you've unit tested
+`example 2`, you would've hopefully caught this before it was ever even deployed.
