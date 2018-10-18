@@ -7,3 +7,6 @@ layout: post
 </script>
 
 This was moved [here](/ruby/2018/09/24/freeze-your-constants-in-ruby.html).
+
+https://kineticdial.github.io/ruby/2018/09/24/freeze-your-constants-in-ruby.html
+https://kineticdial.github.io/ruby/2018/09/25/freeze-your-constants-in-ruby.html

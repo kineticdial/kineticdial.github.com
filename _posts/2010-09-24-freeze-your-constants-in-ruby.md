@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Freeze Your Constants in Ruby"
-date:   2018-09-24 20:57:22 -0700
+date:   2018-09-24 20:57:22 -0000
 categories: ruby
 ---
 
