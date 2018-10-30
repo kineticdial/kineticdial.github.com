@@ -1,0 +1,12 @@
+---
+---
+$base-font-family: 'IBM Plex Serif', times, serif !default;
+$text-color:       rgb(29, 45, 53) !default;
+$brand-color:      rgb(3, 137, 48) !default;
+
+@import "minima";
+
+blockquote {
+    color: $text-color;
+    font-style: normal;
+}

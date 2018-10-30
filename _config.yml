@@ -13,17 +13,18 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Kinetic Dial
+title: kineticdial
+author: Patrick Brown
 email: kineticdial@icloud.com
 description: >- # this means to ignore newlines until "baseurl:"
   Patrick Brown is a self-taught software engineer from New England. Today, he
-  entertains himself by playing beer-league hockey, studying Environmental
-  Sciences at Oregon State University, and running Quasars, a link-aggregator
-  for Astrophysics.
+  entertains himself by playing beer-league hockey and running Quasars, a
+  link-aggregator for Astrophysics.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://kineticdial.github.io"
 twitter_username: kineticdial
 github_username:  kineticdial
+show_excerpts: true
 
 # Build settings
 markdown: kramdown
