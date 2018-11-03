@@ -17,9 +17,9 @@ title: kineticdial
 author: Patrick Brown
 email: kineticdial@icloud.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Patrick Brown is a self-taught software engineer from New England. Today, he
-  entertains himself by playing beer-league hockey and running Quasars, a
-  link-aggregator for Astrophysics.
+  Patrick Brown is a software engineer from New England. Today, he
+  entertains himself by playing beer-league hockey and running Quasars,
+  a link-aggregator for Astrophysics.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://kineticdial.github.io"
 twitter_username: kineticdial
