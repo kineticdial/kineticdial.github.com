@@ -10,3 +10,9 @@ blockquote {
     color: $text-color;
     font-style: normal;
 }
+
+article {
+    a {
+        text-decoration: underline;
+    }
+}
