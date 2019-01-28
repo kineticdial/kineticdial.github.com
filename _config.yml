@@ -22,17 +22,22 @@ description: >- # this means to ignore newlines until "baseurl:"
   Quasars, a link-aggregator for Astrophysics. He currently
   resides in the beautiful Greater Seattle Area.
 baseurl: "" # the subpath of your site, e.g. /blog
+show_excerpts: true
 url: "https://kineticdial.github.io"
+
 twitter_username: kineticdial
 github_username:  kineticdial
-linkedin_username: pab
-show_excerpts: true
+medium_username: kineticdial
+mastodon:
+ - username: kineticdial
+   instance: ruby.social
 
 # Build settings
 markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
