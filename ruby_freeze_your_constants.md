@@ -1,10 +1,9 @@
 ---
 layout: page
 date:   2018-09-24
+title: "Freeze Your Constants in Ruby"
 categories: ruby
 ---
-
-# Freeze Your Constants in Ruby
 
 Years ago I was working on a very large Ruby on Rails codebase that used
 constants to hold lists of credit card transaction states. For example:
@@ -56,5 +55,3 @@ This would cause `example 2` to produce a `can't modify frozen array (RuntimeErr
 `example 2`, you would've hopefully caught this before it was ever even deployed.
 
 _[Discuss on Lobste.rs](https://lobste.rs/s/9bxh5m/freeze_your_constants_ruby)_
-
-    _[This post is mirrored on Medium](https://medium.com/kinetic-dial/freeze-your-constants-in-ruby-49e3238c19ef)_
