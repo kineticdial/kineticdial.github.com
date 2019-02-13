@@ -32,6 +32,10 @@ mastodon:
  - username: kineticdial
    instance: ruby.social
 
+header_pages:
+ - writing.html
+ - resume.html
+
 # Build settings
 markdown: kramdown
 theme: minima
