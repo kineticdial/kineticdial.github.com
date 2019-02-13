@@ -16,6 +16,31 @@ blockquote {
     justify-content: space-between;
 }
 
+.float-right {
+    img {
+        border-radius: 100%;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .float-right {
+        float:right;
+        padding-left:16px;
+        width: 256px;
+        img {
+            width:256px;
+        }
+    }
+}
+
+@media screen and (max-width: 799px) {
+    .float-right {
+        img {
+            padding-bottom: 16px;
+        }
+    }
+}
+
 dd {
     margin-left: 40px;
 }
