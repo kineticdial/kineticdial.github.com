@@ -2,13 +2,30 @@
 ---
 $base-font-family: 'IBM Plex Serif', times, serif !default;
 $text-color:       rgb(29, 45, 53) !default;
-$brand-color:      rgb(3, 137, 48) !default;
+$brand-color:      rgb(138, 180, 164) !default;
 
 @import "minima";
 
 blockquote {
     color: $text-color;
     font-style: normal;
+}
+
+.resume-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+dd {
+    margin-left: 40px;
+}
+
+dl {
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 article {
