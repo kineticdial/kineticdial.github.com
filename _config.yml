@@ -35,6 +35,7 @@ mastodon:
 header_pages:
  - writing.html
  - resume.html
+ - bookchallenge2019.html
 
 # Build settings
 markdown: kramdown

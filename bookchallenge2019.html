@@ -1,0 +1,69 @@
+---
+layout: default
+title: "Book Challenge 2019"
+---
+
+<h1 style='text-align:center'>12k Pages Book Challenge 2019</h1>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+<canvas id="myChart" width="500" height="400"></canvas>
+<script>
+  const COLORS = [
+    '#b58900', // yellow
+    '#268bd2', // blue
+    '#d30102', // red
+    '#859900', // green
+    '#6c71c4', // violet
+    '#cb4b16', // orange
+    '#2aa198', // cyan
+    '#d33682'  // magenta
+  ]
+
+  const BOOKS = [
+    {
+      'title': 'Cracking the Coding Interview',
+      'pages': 706
+    },
+    {
+      'title': 'Cracking the Tech Career',
+      'pages': 275
+    }/*,
+    {
+       'title': 'Name of the Wind',
+       'pages': 676
+     },
+     {
+       'title': 'Designing Data-Intensive Applications',
+       'pages': 614
+     },
+     {
+       'title': 'The Fifth Season',
+       'pages': 468
+     }*/
+  ];
+  const PAGES_GOAL = 12000;
+
+  var data = {
+    datasets: [{
+      data: [],
+      backgroundColor: []
+    }],
+    labels: []
+  };
+  var pagesLeft = PAGES_GOAL;
+
+  for (var i = 0; i < BOOKS.length; i++) {
+    data['datasets'][0]['data'].push(BOOKS[i]['pages']);
+    data['datasets'][0]['backgroundColor'].push(COLORS[i % COLORS.length]);
+    data['labels'].push(BOOKS[i]['title']);
+    pagesLeft = pagesLeft - BOOKS[i]['pages'];
+  }
+  data['datasets'][0]['data'].push(pagesLeft);
+  data['labels'].push('Pages Left');
+
+  let ctx = document.getElementById("myChart");
+  let myDoughnutChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: Chart.defaults.doughnut
+  });
+</script>
