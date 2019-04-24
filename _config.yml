@@ -20,7 +20,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   Patrick is a software engineer from New England. Today, he
   entertains himself by playing beer-league hockey and running
   Quasars, a link-aggregator for Astrophysics. He currently
-  resides in the beautiful Greater Seattle Area.
+  resides in beautiful Seattle.
 baseurl: "" # the subpath of your site, e.g. /blog
 show_excerpts: true
 url: "https://kineticdial.github.io"
