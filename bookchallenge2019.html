@@ -3,7 +3,7 @@ layout: default
 title: "Book Challenge 2019"
 ---
 
-<h1 style='text-align:center'>12k Pages Book Challenge 2019</h1>
+<h1 style='text-align:center'>5k Pages Book Challenge 2019</h1>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
 <canvas id="myChart" width="500" height="400"></canvas>
 <script>
@@ -26,21 +26,37 @@ title: "Book Challenge 2019"
     {
       'title': 'Cracking the Tech Career',
       'pages': 275
-    }/*,
-    {
-       'title': 'Name of the Wind',
-       'pages': 676
-     },
-     {
-       'title': 'Designing Data-Intensive Applications',
-       'pages': 614
-     },
-     {
-       'title': 'The Fifth Season',
-       'pages': 468
-     }*/
+    } //,
+    // {
+    //   'title': 'Name of the Wind',
+    //   'pages': 676
+    // },
+    // {
+    //   'title': 'Designing Data-Intensive Applications',
+    //   'pages': 614
+    // },
+    // {
+    //   'title': 'The Fifth Season',
+    //   'pages': 468
+    // },
+    // {
+    //   'title': 'Tape to Space',
+    //   'pages': 404
+    // },
+    // {
+    //   'title': 'The Go Programming Language',
+    //   'pages': 400
+    // },
+    // {
+    //   'title': 'Site Reliability Engineering',
+    //   'pages': 552
+    // },
+    // {
+    //   'title': "The Dark Forest (Remembrance of Earth's Past Book 2)",
+    //   'pages': 513
+    // }
   ];
-  const PAGES_GOAL = 12000;
+  const PAGES_GOAL = 5000;
 
   var data = {
     datasets: [{
@@ -57,8 +73,11 @@ title: "Book Challenge 2019"
     data['labels'].push(BOOKS[i]['title']);
     pagesLeft = pagesLeft - BOOKS[i]['pages'];
   }
-  data['datasets'][0]['data'].push(pagesLeft);
-  data['labels'].push('Pages Left');
+
+  if (pagesLeft > 0) {
+    data['datasets'][0]['data'].push(pagesLeft);
+    data['labels'].push('Pages Left');
+  }
 
   let ctx = document.getElementById("myChart");
   let myDoughnutChart = new Chart(ctx, {
