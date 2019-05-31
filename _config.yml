@@ -17,13 +17,11 @@ title: kineticdial
 author: Patrick Brown
 # email: kineticdial@icloud.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Patrick is a software engineer from New England. Today, he
-  entertains himself by playing beer-league hockey and running
-  Quasars, a link-aggregator for Astrophysics. He currently
-  resides in beautiful Seattle.
+  Patrick is a software engineer from New England currently
+  residing in Seattle.
 baseurl: "" # the subpath of your site, e.g. /blog
 show_excerpts: true
-url: "https://kineticdial.github.io"
+url: "https://kineticdial.com"
 
 github_username:  kineticdial
 medium_username: kineticdial
